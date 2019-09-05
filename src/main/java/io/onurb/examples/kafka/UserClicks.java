@@ -18,9 +18,11 @@ public class UserClicks {
 
     // Attributs publics pour simplifier :O
 
-    public final String name;
-    public final String region;
-    public final long clicks;
+    public String name;
+    public String region;
+    public long clicks;
+
+    public UserClicks() {}
 
     public UserClicks(String name, String region, long clicks) {
         this.name = name;

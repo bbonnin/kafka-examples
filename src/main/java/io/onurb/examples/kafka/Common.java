@@ -11,6 +11,9 @@ public class Common {
     public static String USER_CLICKS_TOPIC = "user-clicks-topic";
     public static String USER_REGION_STORE = "user-region-store";
     public static String USER_REGION_CLICKS_TOPIC = "user-region-clicks-topic";
+    public static String USER_REGION_CLICKS_TEMP_STORE = "user-region-clicks-temp-store";
+
+    public static int CLICKS_THRESHOLD = 100;
 
 
     public static Properties commonProps(String appId) {

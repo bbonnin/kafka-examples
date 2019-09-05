@@ -23,9 +23,10 @@ But: alimenter un topic avec des données enrichies : clé=user, valeur=(user, r
 
 
 * Exemple 2: création de 2 stores
-  * 1 avec les données enrichie mais incomplète (on considère que c'est complet qu'on a reçu au moins 3 messages pour un même user)
+  * 1 avec les données enrichie mais incomplète (on considère que c'est complet qu'on a au moins 20 clics pour un même user)
   * 1 store avec les regions (idem 1er exemples)
   * quand les données sont complètes, envoie vers un topic final
+  * Classes dans le package: `io.onurb.examples.kafka.stores`
 
 
 ```bash
@@ -42,6 +43,9 @@ kafka-topics --zookeeper localhost:2181 --create --topic region-clicks-store --r
 kafka-console-producer --broker-list localhost:9092 --topic user-region-topic --property "parse.key=true" --property "key.separator=:"
 > ed:CA
 
+
+# Pour voir le contenu du topic final (possible avec la classe TopicConsumer aussi)
+kafka-console-consumer --bootstrap-server localhost:9092 --topic user-region-clicks-topic
 ```
 
 
