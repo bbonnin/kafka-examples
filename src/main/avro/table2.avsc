@@ -1,0 +1,8 @@
+{
+  "namespace": "io.onurb.examples.avro.table2",
+  "type": "record",
+  "name": "TableRecord",
+  "fields": [
+    {"name": "table", "type": "string"}
+  ]
+}
