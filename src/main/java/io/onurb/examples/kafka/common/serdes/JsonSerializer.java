@@ -1,7 +1,5 @@
-package io.onurb.examples.kafka.serdes;
+package io.onurb.examples.kafka.common.serdes;
 
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
@@ -10,13 +8,12 @@ import java.util.Map;
 /**
  * Source: https://github.com/apache/kafka/blob/1.0/streams/examples/src/main/java/org/apache/kafka/streams/examples/pageview/JsonPOJOSerializer.java
  */
-public class JsonPOJOSerializer<T> implements Serializer<T> {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+public class JsonSerializer<T> extends AbstractJsonSerdes<T> implements Serializer<T> {
 
     /**
      * Default constructor needed by Kafka
      */
-    public JsonPOJOSerializer() {
+    public JsonSerializer() {
     }
 
     @Override
@@ -25,8 +22,9 @@ public class JsonPOJOSerializer<T> implements Serializer<T> {
 
     @Override
     public byte[] serialize(String topic, T data) {
-        if (data == null)
+        if (data == null) {
             return null;
+        }
 
         try {
             return objectMapper.writeValueAsBytes(data);
@@ -34,10 +32,4 @@ public class JsonPOJOSerializer<T> implements Serializer<T> {
             throw new SerializationException("Error serializing JSON message", e);
         }
     }
-
-    @Override
-    public void close() {
-    }
-
 }
-

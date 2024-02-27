@@ -1,6 +1,6 @@
-package io.onurb.examples.kafka.transform;
+package io.onurb.examples.kafka.streams.transform;
 
-import io.onurb.examples.kafka.UserClicks;
+import io.onurb.examples.kafka.streams.UserClicks;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.kstream.TransformerSupplier;

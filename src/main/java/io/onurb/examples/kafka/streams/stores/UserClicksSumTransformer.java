@@ -1,6 +1,6 @@
-package io.onurb.examples.kafka.stores;
+package io.onurb.examples.kafka.streams.stores;
 
-import io.onurb.examples.kafka.UserClicks;
+import io.onurb.examples.kafka.streams.UserClicks;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.kstream.TransformerSupplier;
@@ -8,7 +8,7 @@ import org.apache.kafka.streams.processor.ProcessorContext;
 import org.apache.kafka.streams.state.KeyValueStore;
 import org.apache.kafka.streams.state.ValueAndTimestamp;
 
-import static io.onurb.examples.kafka.Common.CLICKS_THRESHOLD;
+import static io.onurb.examples.kafka.streams.Common.CLICKS_THRESHOLD;
 
 
 /**

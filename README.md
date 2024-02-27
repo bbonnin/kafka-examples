@@ -7,7 +7,17 @@ Lecture d'un document avro avec un record générique ou un schéma ayant un cha
 Classes du package: `io.onurb.examples.avro`
 
 
-## Exemples avec transform et state stores
+## Exemples de sécurisation des messages
+
+Voir les classes dans le package `io.onurb.examples.kafka.security`.
+Cela inclut:
+* chiffrement partiel d'un message
+* chiffrement complet d'un message
+
+Exemples avec ou sans schema registry.
+
+
+## Exemples Kafka Streams avec transform et state stores
 
 Contexte:
 * un topic alimenté avec des données de référence : un user (clé) et sa région (valeur)
@@ -17,7 +27,7 @@ But: alimenter un topic avec des données enrichies : clé=user, valeur=(user, r
 
 
 * Exemple 1: utilisation simple d'un `transform` (pour aller chercher des données dans le state store et enrichir les données):
-  * Classes dans le packages: `io.onurb.examples.kafka.transform`
+  * Classes dans le packages: `io.onurb.examples.kafka.streams.transform`
   * topic de référence matérialisé sous la forme d'un state store
   * méthode `transform` utilisé pour enrichir les données du topic des données temps réel à partir des données stockées dans le state store
 
@@ -26,7 +36,7 @@ But: alimenter un topic avec des données enrichies : clé=user, valeur=(user, r
   * 1 avec les données enrichie mais incomplète (on considère que c'est complet qu'on a au moins 20 clics pour un même user)
   * 1 store avec les regions (idem 1er exemples)
   * quand les données sont complètes, envoie vers un topic final
-  * Classes dans le package: `io.onurb.examples.kafka.stores`
+  * Classes dans le package: `io.onurb.examples.kafka.streams.stores`
 
 
 ```bash

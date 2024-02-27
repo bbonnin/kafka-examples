@@ -1,8 +1,8 @@
-package io.onurb.examples.kafka;
+package io.onurb.examples.kafka.streams;
 
 
-import io.onurb.examples.kafka.serdes.JsonPOJODeserializer;
-import io.onurb.examples.kafka.serdes.JsonPOJOSerializer;
+import io.onurb.examples.kafka.common.serdes.JsonDeserializer;
+import io.onurb.examples.kafka.common.serdes.JsonSerializer;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
@@ -33,11 +33,11 @@ public class UserClicks {
     public static Serde<UserClicks> serdes() {
         final Map<String, Object> serdeProps = new HashMap<>();
 
-        final Serializer<UserClicks> serializer = new JsonPOJOSerializer<>();
+        final Serializer<UserClicks> serializer = new JsonSerializer<>();
         serdeProps.put("JsonPOJOClass", UserClicks.class);
         serializer.configure(serdeProps, false);
 
-        final Deserializer<UserClicks> deserializer = new JsonPOJODeserializer<>();
+        final Deserializer<UserClicks> deserializer = new JsonDeserializer<>();
         serdeProps.put("JsonPOJOClass", UserClicks.class);
         deserializer.configure(serdeProps, false);
 

@@ -1,4 +1,4 @@
-package io.onurb.examples.kafka;
+package io.onurb.examples.kafka.streams;
 
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsConfig;
