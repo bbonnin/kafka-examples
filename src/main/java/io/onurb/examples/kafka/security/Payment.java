@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@EncryptedData
+@EncryptedData
 public class Payment {
 
     @JsonProperty(required = true)

@@ -1,8 +1,6 @@
-package io.onurb.examples.kafka.security;
+package io.onurb.examples.kafka.security.consumer;
 
-import io.confluent.kafka.serializers.KafkaJsonDeserializerConfig;
-import io.confluent.kafka.serializers.json.KafkaJsonSchemaDeserializer;
-import io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer;
+import io.onurb.examples.kafka.security.Payment;
 import io.onurb.examples.kafka.security.serdes.PaymentSerdes;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -11,30 +9,31 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.Serdes;
 
 import java.time.Duration;
-import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
-public class SecuredMessageWithSchemaRegistryConsumer {
+public class AbstractConsumer {
 
-    public static void main(String[] args) {
+    protected KafkaConsumer<Long, Payment> consumer;
 
-        final String topic = "payments";
+    protected void init() {
+        init(Map.of());
+    }
 
+    protected void init(Map<?, ?> otherProps) {
         final Properties props = new Properties();
-
         props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "secured-payments-consumers");
         props.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, Serdes.Long().deserializer().getClass().getName());
-        //props.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaJsonSchemaDeserializer.class.getName());
-        props.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, PaymentSerdes.JsonSchemaDeserializer.class.getName());
-        props.put("schema.registry.url", "http://localhost:8081");
+        props.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, PaymentSerdes.Deserializer.class.getName());
         props.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest"); //"earliest"); // To ignore previous badly formatted data
-        props.put(KafkaJsonDeserializerConfig.JSON_VALUE_TYPE, Payment.class.getName());
+        props.putAll(otherProps);
+        consumer = new KafkaConsumer<>(props);
+    }
 
-
-        final KafkaConsumer<Long, Payment> consumer = new KafkaConsumer<>(props);
-
-        consumer.subscribe(Arrays.asList(topic));
+    protected void consumeMessages(String topic) {
+        consumer.subscribe(List.of(topic));
 
         while (true) {
             ConsumerRecords<Long, Payment> records = consumer.poll(Duration.ofMillis(200));
@@ -45,5 +44,9 @@ public class SecuredMessageWithSchemaRegistryConsumer {
                 }
             }
         }
+    }
+
+    protected void close() {
+        consumer.close(Duration.ofMinutes(1));
     }
 }

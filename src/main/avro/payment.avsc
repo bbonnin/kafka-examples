@@ -1,0 +1,10 @@
+{
+  "namespace": "io.onurb.examples.kafka.security.avro",
+  "type": "record",
+  "name": "Payment",
+  "fields": [
+    {"name": "name", "type": "string"},
+    {"name": "amount", "type": "double"},
+    {"name": "iban", "type": "string"}
+  ]
+}

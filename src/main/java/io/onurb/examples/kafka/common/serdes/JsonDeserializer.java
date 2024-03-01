@@ -16,6 +16,10 @@ public class JsonDeserializer<T> extends AbstractJsonSerdes<T> implements Deseri
     public JsonDeserializer() {
     }
 
+    public JsonDeserializer(Class<T> tClass) {
+        this.tClass = tClass;
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public void configure(Map<String, ?> props, boolean isKey) {

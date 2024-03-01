@@ -44,7 +44,9 @@ public final class EncryptionUtils {
                             DEMO_ENCRYPTED_FIELD_SALT);
 
                     // Use this new value (we suppose it's a string for a demo purpose)
-                    writeField(data, field.getName(), new String(decryptedValue, UTF_8));
+                    if (decryptedValue != null) {
+                        writeField(data, field.getName(), new String(decryptedValue, UTF_8));
+                    }
                 });
     }
 
